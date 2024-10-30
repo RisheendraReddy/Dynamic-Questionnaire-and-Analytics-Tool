@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort
+from flask import Flask, jsonify, abort, request
 from flask_cors import CORS
 import os
 import json
@@ -17,6 +17,17 @@ def load_questions():
         print(f"Error loading questions: {e}")
         return None
 
+def save_questions(data):
+    try:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        json_file_path = os.path.join(base_dir, '..', 'Questions', 'Qs.json')
+        with open(json_file_path, 'w') as json_file:
+            json.dump(data, json_file, indent=2)
+        return True
+    except Exception as e:
+        print(f"Error saving questions: {e}")
+        return False
+
 questions_data = load_questions()
 
 @app.route('/get_questions', methods=['GET'])
@@ -30,6 +41,29 @@ def get_questions():
 def info():
     return jsonify({"message": "This is the backend server for our capstone project."})
 
+@app.route('/add_question', methods=['POST'])
+def add_question():
+    if not request.is_json:
+        abort(400, description="Request must be JSON")
+    data = request.get_json()
+    category = data.get('category')
+    question = data.get('question')
+    options = data.get('options')
+    if not category or not question or not options:
+        abort(400, description="Missing 'category', 'question', or 'options'")
+    if not isinstance(options, list) or not all(isinstance(opt, str) for opt in options):
+        abort(400, description="'options' must be a list of strings")
+    if category not in questions_data:
+        abort(400, description="Category does not exist")
+    new_question = {
+        "question": question,
+        "options": options
+    }
+    questions_data[category].append(new_question)
+    if save_questions(questions_data):
+        return jsonify({"message": "Question added successfully"}), 201
+    else:
+        abort(500, description="Failed to save questions data.")
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
