@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
-import Question from './components/Question';
-import Results from './components/Results';
+import Question from "./Question";
+import Results from "./Results";
 
 function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);

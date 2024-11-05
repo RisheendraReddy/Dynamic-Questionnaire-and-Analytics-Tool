@@ -1,5 +1,8 @@
 import React from 'react';
+import { Chart as ChartJS, PointElement, LineElement } from "chart.js";
 import { Radar } from 'react-chartjs-2';
+
+ChartJS.register(PointElement, LineElement);
 
 function Results({ responses }) {
   const categories = {};
