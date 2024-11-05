@@ -10,10 +10,11 @@ function App() {
 
   //Questions will be here. random sample ones for now
   const questions = [
-    { text: "How would you rate your communication skills?", category: "Communication" },
-    { text: "How proficient are you in problem-solving?", category: "Problem Solving" },
-    { text: "How well do you handle time management?", category: "Time Management" },
-    { text: "How adaptable are you to new situations?", category: "Adaptability" },
+    { text: "Is the primary offering something physical that users or customers will own and interact with directly?", category: "Communication" },
+    { text: "Does your offering require ongoing or repeated interactions with the customer to deliver value over time (e.g., consulting, maintenance, or support)?", category: "Problem Solving" },
+    { text: "Have you clearly identified distinct customer segments within your target market, based on both demographic and psychographic data (e.g., age, values, lifestyle)?", category: "Time Management" },
+    { text: "Have you conducted interviews, surveys, or collected qualitative data directly from potential customers to validate their needs, pain points, and decision-making processes?", category: "Adaptability" },
+    { text: "Have you tested or validated your customer personas in a real-world context, such as through pilot programs, focus groups, or market tests?", category: "Adaptability" },
   ];
 
   const handleAnswer = (category, score) => {
