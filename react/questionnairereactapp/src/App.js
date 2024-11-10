@@ -64,8 +64,8 @@ function App() {
             <div className="home">
               {/*<Logo/>*/}
               <div className="email-container">
-                <h2>Welcome!</h2>
-                <p>This quiz will help us learn more about your business and can help you know areas that might need improvment.</p>
+                <h2>Welcome! Business Venture Quiz</h2>
+                <p>This quiz will help us learn more about your business and can help you know areas that might need improvement.</p>
                 <h3>Please enter your email before starting:</h3>
                 <input
                     type="email"
