@@ -1,0 +1,39 @@
+/* New styles for results page (made to match app.css)*/
+.results-container {
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.results-container h2 {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.results-container h3 {
+    font-size: 1.4em;
+    color: #333;
+}
+.results-container h4 {
+    font-size: 1.0em;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Radar chart styles*/
+.results-container .radar-chart {
+    background-color: #f9f9f9;
+    margin: 20px auto;
+    border-radius: 8px;
+    width: 80%;
+    height: auto;
+    max-width: 600px;
+}
+
+
+/* Add some margin between paragraphs and headings */
+.results-container p + h4 {
+    margin-top: 20px;
+}

@@ -3,6 +3,7 @@ import './App.css';
 import Question from "./Question";
 import {ReactComponent as Logo} from "./logo.svg";
 import Results from "./Results";
+import logo from "./asu_logo.png";
 
 function App() {
   const [hasEmail, setHasEmail] = useState(false);
@@ -60,9 +61,9 @@ function App() {
 
   return (
       <div className="App">
+        <img src={logo} alt="Logo" className="results-logo" />
         {!hasEmail ? (
             <div className="home">
-              {/*<Logo/>*/}
               <div className="email-container">
                 <h2>Welcome! Business Venture Quiz</h2>
                 <p>This quiz will help us learn more about your business and can help you know areas that might need improvement.</p>
