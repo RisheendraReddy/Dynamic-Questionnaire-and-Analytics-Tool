@@ -1,7 +1,9 @@
 import React from 'react';
 import { Chart as ChartJS, PointElement, LineElement, RadialLinearScale } from "chart.js";
 import { Radar } from 'react-chartjs-2';
-import './Results.css'
+import './Results.css';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 ChartJS.register(PointElement, LineElement, RadialLinearScale);
 
@@ -27,6 +29,16 @@ function Results({ responses }) {
     ],
   };
 
+    // Export functionality: Download results as PDF
+  const handleDownloadPDF = async () => {
+    const element = document.querySelector(".results-container"); // Select the container
+    const canvas = await html2canvas(element); // Convert to canvas
+    const imgData = canvas.toDataURL("image/png"); // Convert to image data
+    const pdf = new jsPDF("p", "mm", "a4"); // Create PDF
+    pdf.addImage(imgData, "PNG", 10, 10, 190, 0); // Add image to PDF
+    pdf.save("business-venture-results.pdf"); // Save PDF
+  };
+  
   return (
       <div>
       <div className="results-container">
@@ -34,6 +46,9 @@ function Results({ responses }) {
       <h3>We've sent a copy of your results to your email!</h3>
         <div className="radar-chart">
           <Radar data={data} />
+
+    {/* Button for exporting the results */}
+      <button onClick={handleDownloadPDF}>Download Results as PDF</button>
         </div>
       <h2> Results Meaning</h2>
       <p>Each category tells you a bit about your business and where it's strengths and weaknesses lie.</p>
