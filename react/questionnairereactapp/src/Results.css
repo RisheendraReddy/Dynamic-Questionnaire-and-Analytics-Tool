@@ -5,6 +5,7 @@
     border-radius: 8px;
     width: 80%;
     max-width: 1200px;
+    word-wrap: break-word;
 }
 
 .results-container h2 {
@@ -29,11 +30,37 @@
     border-radius: 8px;
     width: 80%;
     height: auto;
-    max-width: 600px;
+    max-width: 800px; /* Adjusted for better PDF export */
 }
 
+/* Button styling */
+.results-container button {
+    margin: 10px 0;
+    padding: 10px 20px;
+    font-size: 1em;
+    background-color: #ffc324;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.results-container button:hover {
+    background-color: #a40145;
+}
 
 /* Add some margin between paragraphs and headings */
 .results-container p + h4 {
     margin-top: 20px;
+}
+
+/* Fade animation for transitions */
+.results-container.fade-appear {
+    opacity: 0;
+}
+
+.results-container.fade-appear-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
 }
