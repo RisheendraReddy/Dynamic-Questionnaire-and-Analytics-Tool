@@ -1,0 +1,5 @@
+The Google Form Implementation provides arguably the easiest implementation of the venture audit, the idea here being that the Form can allow a person to easily set up a venture audit, easily view the results using a Google Form, and allow respondents to get a radar chart with their information.
+
+Note: The person who does these steps will be the sender of the email with the radar chart to the respondents. For example, if John Doe does the steps below and Jane Smith fills out the form, Jane Smith will receive an email from John Doe. There are not any issues with John Doe making the form and filling it out; in that case the sender and receiver will be the same.
+
+Note: will add full pdf once I present to sponsor
