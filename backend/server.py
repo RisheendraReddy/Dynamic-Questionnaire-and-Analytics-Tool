@@ -65,5 +65,27 @@ def add_question():
     else:
         abort(500, description="Failed to save questions data.")
 
+# --- New Endpoint to Submit Responses ---
+@app.route('/submit_responses', methods=['POST'])
+def submit_responses():
+    if not request.is_json:
+        abort(400, description="Request must be JSON")
+    data = request.get_json()
+
+    # Extract email and responses from the request body
+    email = data.get('email')
+    responses = data.get('responses')
+
+    if not email or not responses:
+        abort(400, description="Missing 'email' or 'responses' in request body")
+
+    # Placeholder: Save responses (for now, print them)
+    print(f"Received responses from email: {email}")
+    print(f"Responses: {responses}")
+
+    # You can extend this to save responses to a database or a file
+
+    return jsonify({"message": "Responses saved successfully"}), 200
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8000)
