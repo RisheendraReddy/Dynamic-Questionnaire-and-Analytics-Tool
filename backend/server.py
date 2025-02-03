@@ -89,3 +89,15 @@ def submit_responses():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8000)
+
+
+# Send a POST request to /submit_responses when the quiz is complete.
+# Example payload: 
+# {
+# "email": "user@example.com",
+# "responses": [
+#  {"category": "Business Method Levels", "score": 1},
+#   {"category": "Product/Service Levels", "score": 0}
+#  ]
+# } 
+
