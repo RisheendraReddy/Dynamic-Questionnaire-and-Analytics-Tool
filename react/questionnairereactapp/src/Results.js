@@ -32,7 +32,7 @@ function Results({ responses }) {
     // Export functionality: Download results as PDF
   const handleDownloadPDF = async () => {
     const element = document.querySelector(".results-container"); // Select the container
-    const canvas = await html2canvas(element); // Convert to canvas
+    const canvas = await html2canvas(element, { scale: 2 }); // Convert to canvas with higher resolution
     const imgData = canvas.toDataURL("image/png"); // Convert to image data
     const pdf = new jsPDF("p", "mm", "a4"); // Create PDF
     pdf.addImage(imgData, "PNG", 10, 10, 190, 0); // Add image to PDF
@@ -45,7 +45,7 @@ function Results({ responses }) {
       <h2>Your Results</h2>
       <h3>We've sent a copy of your results to your email!</h3>
         <div className="radar-chart">
-          <Radar data={data} />
+          <Radar data={data} options={{ maintainAspectRatio: false, responsive: true }} />
 
     {/* Button for exporting the results */}
       <button onClick={handleDownloadPDF}>Download Results as PDF</button>
