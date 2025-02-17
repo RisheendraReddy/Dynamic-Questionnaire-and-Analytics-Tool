@@ -1,5 +1,3 @@
-![Storage, empty warehouse and boxes in factory, cargo and shipping logistics of production. Backgrounds, stock and commercial store space in manufacturing plant, supply chain industry and distribution][image1]
-
 # Venture Audit Google Form Documentation
 
 ## Purpose
