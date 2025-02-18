@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import './App.css';
 import Question from "./Question";
-import {ReactComponent as Logo} from "./logo.svg";
+import { ReactComponent as Logo } from "./logo.svg";
 import Results from "./Results";
 import logo from "./asu_logo.png";
 
@@ -11,8 +11,15 @@ function App() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [responses, setResponses] = useState([]);
   const [isComplete, setIsComplete] = useState(false);
-
+    const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("darkMode") === "true"
+  );
+  useEffect(() => {
   //Questions are here - sample questions for now
+    document.body.className = darkMode ? "dark-theme" : "";
+    localStorage.setItem("darkMode", darkMode);
+  }, [darkMode]);
+  
   const questions = [
     { text: "Is the primary offering something physical that users or customers will own and interact with directly?",
       answer1: "Full-time",
@@ -60,7 +67,11 @@ function App() {
   };
 
   return (
+      <div className={`App ${darkMode ? "dark" : "light"}`}>
       <div className="App">
+        <button className="dark-mode-toggle" onClick={() => setDarkMode(!darkMode)}>
+          {darkMode ? "Light Mode" : "Dark Mode"}
+        </button>
         <img src={logo} alt="Logo" className="results-logo" />
         {!hasEmail ? (
             <div className="home">
@@ -75,14 +86,17 @@ function App() {
                     placeholder="Enter your email"
                     required
                 />
-                <button onClick={handleEmailSubmit}>Submit</button>
+                <button  className="animated-button" onClick={handleEmailSubmit}>Submit</button>
               </div>
             </div>
         ) : !isComplete ? (
+          <div>
+              <progress value={currentQuestion + 1} max={questions.length}></progress>
             <Question
                 question={questions[currentQuestion]}
                 onAnswer={handleAnswer}
             />
+          </div>
         ) : (
             <Results responses={responses} />
         )}
