@@ -2,6 +2,11 @@ from flask import Flask, jsonify, abort, request
 from flask_cors import CORS
 import os
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
 
 app = Flask(__name__)
 CORS(app)
@@ -174,6 +179,27 @@ def delete_question():
         return jsonify({"message": "Question deleted successfully"}), 200
     else:
         abort(500, description="Failed to save updated data.")
+
+@app.route('/check_api_key', methods=['POST'])
+def check_api_key():
+    """
+    Check whether the API key provided by the client matches the server's API key.
+    Request body: { "api_key": "some-very-secret-key" }
+    Response body: { "isValid": true or false }
+    """
+    if not request.is_json:
+        abort(400, description="Request must be JSON")
+
+    data = request.get_json()
+    client_api_key = data.get("api_key")
+
+    if not client_api_key:
+        abort(400, description="Missing 'api_key' in request body")
+
+    # Compare with the server's stored API key (loaded from .env)
+    is_valid = (client_api_key == API_KEY)
+
+    return jsonify({"isValid": is_valid}), 200
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8000)
