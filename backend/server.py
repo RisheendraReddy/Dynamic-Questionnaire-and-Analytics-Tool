@@ -65,6 +65,56 @@ def add_question():
     else:
         abort(500, description="Failed to save questions data.")
 
+@app.route('/bulk_upload', methods=['POST'])
+def bulk_upload():
+    """
+    Bulk upload questions.
+    Request body (example):
+    [
+      {
+        "category": "Business Method Levels",
+        "question": "Bulk question 1?",
+        "options": ["Option A", "Option B"]
+      },
+      {
+        "category": "Product/Service Levels",
+        "question": "Bulk question 2?",
+        "options": ["Option X", "Option Y"]
+      }
+    ]
+    """
+    if not request.is_json:
+        abort(400, description="Request must be JSON")
+
+    data = request.get_json()
+    if not isinstance(data, list):
+        abort(400, description="Payload must be a list of question objects")
+
+    for item in data:
+        category = item.get('category')
+        question = item.get('question')
+        options = item.get('options')
+
+        # Validate presence
+        if not category or not question or not options:
+            abort(400, description="Missing 'category', 'question', or 'options' in one of the items")
+
+        # Validate category existence
+        if category not in questions_data:
+            # Optionally, automatically create the category
+            # Or you can require that the category exist
+            questions_data[category] = []
+
+        questions_data[category].append({
+            "question": question,
+            "options": options
+        })
+
+    if save_questions(questions_data):
+        return jsonify({"message": "Bulk questions uploaded successfully"}), 201
+    else:
+        abort(500, description="Failed to save bulk questions.")
+
 # --- New Endpoint to Submit Responses ---
 @app.route('/submit_responses', methods=['POST'])
 def submit_responses():
