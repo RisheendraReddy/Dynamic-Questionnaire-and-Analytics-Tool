@@ -87,6 +87,44 @@ def submit_responses():
 
     return jsonify({"message": "Responses saved successfully"}), 200
 
+@app.route('/delete_question', methods=['DELETE'])
+def delete_question():
+    """
+    Delete a specific question from a category.
+    Request body:
+    {
+      "category": "Business Method Levels",
+      "question": "What is the strategy?"
+    }
+    """
+    if not request.is_json:
+        abort(400, description="Request must be JSON")
+
+    data = request.get_json()
+    category = data.get('category')
+    question_text = data.get('question')
+
+    if not category or not question_text:
+        abort(400, description="Missing 'category' or 'question' in request body")
+
+    if category not in questions_data:
+        abort(400, description="Category does not exist")
+
+    updated_questions = [
+        q for q in questions_data[category]
+        if q['question'] != question_text
+    ]
+
+    if len(updated_questions) == len(questions_data[category]):
+        abort(404, description="Question not found")
+
+    questions_data[category] = updated_questions
+
+    if save_questions(questions_data):
+        return jsonify({"message": "Question deleted successfully"}), 200
+    else:
+        abort(500, description="Failed to save updated data.")
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8000)
 
