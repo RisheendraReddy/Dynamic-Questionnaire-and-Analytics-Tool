@@ -78,16 +78,12 @@ function Results({ responses }) {
       <p>Each category tells you a bit about your business and where its strengths and weaknesses lie.</p>
 
         <h4>Business Method Levels</h4>
-      <h4>Business Method Levels</h4>
         <p>This shows how clear and developed your business plan and processes are. It covers your business goals, priorities, and how you plan to create the product. A high score means you have a strong, well-thought-out plan with a unique product and a good chance of finding a niche market. A low score means you may need to work on your business strategy.</p>
-      <p>This shows how clear and developed your business plan and processes are...</p>
         <h4>Product/Service Levels</h4>
-      <h4>Product/Service Levels</h4>
         <p>This measures how much value your product or service gives to your customers. A high score means your product is new and keeps customers engaged over long periods of time. A low score suggests your product may need improvements to better meet customer needs.</p>
-      <p>This measures how much value your product or service gives to your customers...</p>
         <h4>Persona Spectrum Levels</h4>
-      <h4>Persona Spectrum Levels</h4>
         <p>This shows how much research you've done on your target customers. A high score means you've done a lot of testing and interviews to understand your audience. A low score means you might need to do more research to better identify your target market.</p>
+
     </motion.div>
   );
 }
