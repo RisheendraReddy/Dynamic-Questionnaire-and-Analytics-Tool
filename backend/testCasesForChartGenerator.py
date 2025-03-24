@@ -1,6 +1,6 @@
 import unittest
 import os
-import chart_generator
+from chart_generator import generate_spider_chart
 
 class TestGenerateSpiderChart(unittest.TestCase):
 
