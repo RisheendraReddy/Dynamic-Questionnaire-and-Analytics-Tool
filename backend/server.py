@@ -196,7 +196,6 @@ def check_api_key():
     if not client_api_key:
         abort(400, description="Missing 'api_key' in request body")
 
-    # Compare with the server's stored API key (loaded from .env)
     is_valid = (client_api_key == API_KEY)
 
     return jsonify({"isValid": is_valid}), 200
