@@ -1,4 +1,4 @@
-/* New styles for results page (made to match app.css)*/
+/* New styles for results page (with transitions) */
 .results-container {
     padding: 20px;
     margin: 20px auto;
@@ -6,34 +6,15 @@
     width: 80%;
     max-width: 1200px;
     word-wrap: break-word;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out; /* Fade-in effect */
 }
 
-.results-container h2 {
-    font-size: 1.5em;
-    color: #333;
+.results-container.fade-appear-active {
+    opacity: 1;
 }
 
-.results-container h3 {
-    font-size: 1.4em;
-    color: #333;
-}
-.results-container h4 {
-    font-size: 1.0em;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Radar chart styles*/
-.results-container .radar-chart {
-    background-color: #f9f9f9;
-    margin: 20px auto;
-    border-radius: 8px;
-    width: 80%;
-    height: auto;
-    max-width: 800px; /* Adjusted for better PDF export */
-}
-
-/* Button styling */
+/* Hover effect for buttons */
 .results-container button {
     margin: 10px 0;
     padding: 10px 20px;
@@ -43,11 +24,28 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Transition for background color and scale */
 }
 
 .results-container button:hover {
     background-color: #a40145;
+    transform: scale(1.05); /* Slightly enlarges the button on hover */
+}
+
+/* Radar chart fade-in */
+.results-container .radar-chart {
+    background-color: #f9f9f9;
+    margin: 20px auto;
+    border-radius: 8px;
+    width: 80%;
+    height: auto;
+    max-width: 800px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* Fade-in effect for radar chart */
+}
+
+.results-container .radar-chart.loaded {
+    opacity: 1;
 }
 
 /* Add some margin between paragraphs and headings */
