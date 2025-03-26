@@ -1,0 +1,62 @@
+1. GET /info
+
+curl -X GET http://localhost:8000/info
+
+2. GET /get_questions
+
+curl -X GET http://localhost:8000/get_questions
+
+3. POST /add_question
+
+curl -X POST http://localhost:8000/add_question \
+     -H "Content-Type: application/json" \
+     -d '{
+           "category": "Business Method Levels",
+           "question": "What is your business strategy?",
+           "options": ["Option 1", "Option 2"]
+         }'
+
+4. POST /bulk_upload
+
+curl -X POST http://localhost:8000/bulk_upload \
+     -H "Content-Type: application/json" \
+     -d '[
+           {
+             "category": "Business Method Levels",
+             "question": "Bulk question 1?",
+             "options": ["Option A", "Option B"]
+           },
+           {
+             "category": "Product/Service Levels",
+             "question": "Bulk question 2?",
+             "options": ["Option X", "Option Y"]
+           }
+         ]'
+
+
+5. POST /submit_responses
+
+curl -X POST http://localhost:8000/submit_responses \
+     -H "Content-Type: application/json" \
+     -d '{
+           "email": "aharish4@asu.edu",
+           "responses": [
+             {"category": "Business Method Levels", "score": 1},
+             {"category": "Product/Service Levels", "score": 0}
+           ]
+         }'
+
+6. DELETE /delete_question
+
+curl -X DELETE http://localhost:8000/delete_question \
+     -H "Content-Type: application/json" \
+     -d '{
+           "category": "Business Method Levels",
+           "question": "What is your business strategy?"
+         }'
+
+7. Validate API key
+
+curl -X POST http://localhost:8000/check_api_key \
+     -H "Content-Type: application/json" \
+     -d '{"api_key": "abcdefg"}'
