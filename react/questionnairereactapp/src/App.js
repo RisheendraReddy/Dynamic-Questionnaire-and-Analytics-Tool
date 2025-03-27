@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './App.css';
 import Question from "./Question";
-import {ReactComponent as Logo} from "./logo.svg";
 import Results from "./Results";
 import logo from "./asu_logo.png";
 
@@ -59,36 +59,143 @@ function App() {
     }
   };
 
+  // Animation variants
+  const pageTransition = {
+    hidden: { opacity: 0, x: -300 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 30, 
+        damping: 10,
+        mass: 0.75
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      x: 300,
+      transition: { 
+        ease: "easeInOut", 
+        duration: 0.3 
+      }
+    }
+  };
+
+  const logoVariants = {
+    initial: { scale: 0.8, opacity: 0 },
+    animate: { 
+      scale: 1, 
+      opacity: 1,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-      <div className="App">
-        <img src={logo} alt="Logo" className="results-logo" />
+    <div className="App">
+      <motion.img 
+        src={logo} 
+        alt="Logo" 
+        className="results-logo"
+        variants={logoVariants}
+        initial="initial"
+        animate="animate"
+      />
+      
+      <AnimatePresence mode="wait">
         {!hasEmail ? (
-            <div className="home">
-              <div className="email-container">
-                <h2>Welcome! Business Venture Quiz</h2>
-                <p>This quiz will help us learn more about your business and can help you know areas that might need improvement.</p>
-                <h3>Please enter your email before starting:</h3>
+          <motion.div 
+            key="email-form"
+            className="home"
+            variants={pageTransition}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <motion.div 
+              className="email-container"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+            >
+              <motion.h2
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 0.5 }}
+              >
+                Welcome! Business Venture Quiz
+              </motion.h2>
+              
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6, duration: 0.5 }}
+              >
+                This quiz will help us learn more about your business and can help you know areas that might need improvement.
+              </motion.p>
+              
+              <motion.h3
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8, duration: 0.5 }}
+              >
+                Please enter your email before starting:
+              </motion.h3>
+              
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.0, duration: 0.5 }}
+              >
                 <input
-                    type="email"
-                    value={email}
-                    onChange={(userinput) => setEmail(userinput.target.value)}
-                    placeholder="Enter your email"
-                    required
+                  type="email"
+                  value={email}
+                  onChange={(userinput) => setEmail(userinput.target.value)}
+                  placeholder="Enter your email"
+                  required
                 />
-                <button onClick={handleEmailSubmit}>Submit</button>
-              </div>
-            </div>
+              </motion.div>
+              
+              <motion.button 
+                onClick={handleEmailSubmit}
+                whileHover={{ scale: 1.05, backgroundColor: "#a40145" }}
+                whileTap={{ scale: 0.95 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
+              >
+                Submit
+              </motion.button>
+            </motion.div>
+          </motion.div>
         ) : !isComplete ? (
+          <motion.div
+            key="questions"
+            variants={pageTransition}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
             <Question
-                question={questions[currentQuestion]}
-                onAnswer={handleAnswer}
-                currentQuestion={currentQuestion}
-                totalQuestions={questions.length}
+              question={questions[currentQuestion]}
+              onAnswer={handleAnswer}
+              currentQuestion={currentQuestion}
+              totalQuestions={questions.length}
             />
+          </motion.div>
         ) : (
+          <motion.div
+            key="results"
+            variants={pageTransition}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
             <Results responses={responses} />
+          </motion.div>
         )}
-      </div>
+      </AnimatePresence>
+    </div>
   );
 }
 
