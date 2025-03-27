@@ -82,6 +82,8 @@ function App() {
             <Question
                 question={questions[currentQuestion]}
                 onAnswer={handleAnswer}
+                currentQuestion={currentQuestion}
+                totalQuestions={questions.length}
             />
         ) : (
             <Results responses={responses} />
