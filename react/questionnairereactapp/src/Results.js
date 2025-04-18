@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Chart as ChartJS, PointElement, LineElement, RadialLinearScale } from "chart.js";
 import { Radar } from 'react-chartjs-2';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { motion } from 'framer-motion';
 import ConfettiEffect from './ConfettiEffect';
+import { ThemeContext } from './ThemeContext';
 import './Results.css';
 
 ChartJS.register(PointElement, LineElement, RadialLinearScale);
@@ -12,6 +13,7 @@ ChartJS.register(PointElement, LineElement, RadialLinearScale);
 function Results({ responses }) {
   const [chartLoaded, setChartLoaded] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
+  const { theme } = useContext(ThemeContext); // Get current theme
 
   // Calculate scores by category
   const categories = {};
@@ -41,20 +43,21 @@ function Results({ responses }) {
     scales: {
       r: {
         angleLines: {
-          color: 'rgba(0, 0, 0, 0.1)',
+          color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
         },
         grid: {
-          color: 'rgba(0, 0, 0, 0.1)',
+          color: theme === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
         },
         pointLabels: {
           font: {
             size: 14,
             weight: 'bold'
-          }
+          },
+          color: theme === 'dark' ? '#e0e0e0' : '#333',
         },
         ticks: {
-          backdropColor: 'rgba(255, 255, 255, 0.8)',
-          color: '#333',
+          backdropColor: theme === 'dark' ? 'rgba(45, 45, 45, 0.8)' : 'rgba(255, 255, 255, 0.8)',
+          color: theme === 'dark' ? '#e0e0e0' : '#333',
         }
       }
     },
@@ -64,7 +67,8 @@ function Results({ responses }) {
         labels: {
           font: {
             size: 14
-          }
+          },
+          color: theme === 'dark' ? '#e0e0e0' : '#333',
         }
       },
       tooltip: {
@@ -72,7 +76,7 @@ function Results({ responses }) {
           title: (items) => items[0].label,
           label: (item) => `Score: ${item.raw}`
         },
-        backgroundColor: 'rgba(0, 0, 0, 0.7)',
+        backgroundColor: theme === 'dark' ? 'rgba(45, 45, 45, 0.9)' : 'rgba(0, 0, 0, 0.7)',
         titleFont: {
           size: 16
         },
@@ -197,25 +201,34 @@ function Results({ responses }) {
         </div>
       </motion.div>
 
-      <motion.button
-        onClick={handleDownloadPDF}
-        variants={buttonVariants}
-        whileHover="hover"
-        whileTap="tap"
-      >
-        Download Results as PDF
-      </motion.button>
+      {/* Fixed layout for download button and heading */}
+      <div className="actions-container">
+        <div className="download-button-container">
+          <motion.button
+            className="download-btn"
+            onClick={handleDownloadPDF}
+            variants={buttonVariants}
+            whileHover="hover"
+            whileTap="tap"
+          >
+            Download Results as PDF
+          </motion.button>
+        </div>
 
-      <motion.h2 
-        variants={itemVariants}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.5 }}
-      >
-        Results Meaning
-      </motion.h2>
+        <div className="results-meaning-container">
+          <motion.h2 
+            variants={itemVariants}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.8, duration: 0.5 }}
+          >
+            Results Meaning
+          </motion.h2>
+        </div>
+      </div>
       
       <motion.p 
+        className="description"
         variants={itemVariants}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
