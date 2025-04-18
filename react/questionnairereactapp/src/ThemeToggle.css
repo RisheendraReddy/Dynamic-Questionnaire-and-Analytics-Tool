@@ -1,0 +1,100 @@
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.toggle-track {
+  width: 60px;
+  height: 30px;
+  background-color: #8C1D40;
+  border-radius: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  transition: background-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+[data-theme='dark'] .toggle-track {
+  background-color: #2d2d2d;
+}
+
+.toggle-thumb {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  left: 3px;
+  top: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .toggle-thumb {
+  transform: translateX(30px);
+  background-color: #FFC627;
+}
+
+.toggle-icon {
+  font-size: 14px;
+  z-index: 1;
+  user-select: none;
+  line-height: 0;
+  transition: color 0.3s ease;
+  filter: none;
+}
+
+/* Apply colors directly to emoji with filter */
+html[data-theme='light'] .toggle-icon {
+  filter: saturate(1.5) brightness(1.1);
+  color: #FFC627; /* ASU gold in light mode */
+}
+
+html[data-theme='dark'] .toggle-icon {
+  filter: sepia(0.6) hue-rotate(300deg) saturate(2.5) brightness(0.8);
+  color: #8C1D40; /* ASU maroon in dark mode */
+}
+
+.toggle-icon.sun {
+  margin-left: 4px;
+}
+
+.toggle-icon.moon {
+  margin-right: 4px;
+}
+
+/* Add hover effects */
+.theme-toggle:hover .toggle-track {
+  box-shadow: 0 0 8px rgba(140, 29, 64, 0.6);
+}
+
+[data-theme='dark'] .theme-toggle:hover .toggle-track {
+  box-shadow: 0 0 8px rgba(255, 198, 39, 0.6);
+}
+
+@media (max-width: 768px) {
+  .theme-toggle {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .toggle-track {
+    width: 50px;
+    height: 26px;
+  }
+  
+  .toggle-thumb {
+    width: 20px;
+    height: 20px;
+  }
+  
+  [data-theme='dark'] .toggle-thumb {
+    transform: translateX(24px);
+  }
+}
