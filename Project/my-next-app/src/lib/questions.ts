@@ -7,6 +7,7 @@ export const questions = [
     answer2: "Part-time, alongside other commitments",
     points2: "0",
     category: "Business Method Levels",
+    id: "bml-1",
   },
   {
     text: "Is your goal to create a business that supports your personal lifestyle, or are you aiming for rapid growth and expansion into larger markets?",
@@ -15,6 +16,7 @@ export const questions = [
     answer2: "Rapid Growth and expansion into larger markets",
     points2: "0",
     category: "Business Method Levels",
+    id: "bml-2",
   },
   {
     text: "Are you developing something unique and innovative, potentially requiring significant external investment, or are you building around an existing, proven business model?",
@@ -23,6 +25,7 @@ export const questions = [
     answer2: "Building around an existing, proven business model",
     points2: "0",
     category: "Business Method Levels",
+    id: "bml-3",
   },
   {
     text: "Do you see your venture as something you will build from scratch, or are you looking to acquire or expand an existing business or work within an established company?",
@@ -31,6 +34,7 @@ export const questions = [
     answer2: "Looking to acquire or expand an existing business or work within an established company",
     points2: "0",
     category: "Business Method Levels",
+    id: "bml-4",
   },
 
   // Product/Service Levels
@@ -41,6 +45,7 @@ export const questions = [
     answer2: "No (ex. A service)",
     points2: "0",
     category: "Product/Service Levels",
+    id: "psl-1",
   },
   {
     text: "Does your offering require ongoing or repeated interactions with the customer to deliver value over time (e.g., consulting, maintenance, or support)?",
@@ -49,6 +54,7 @@ export const questions = [
     answer2: "No (ex. Product)",
     points2: "0",
     category: "Product/Service Levels",
+    id: "psl-2",
   },
 
   // Persona Spectrum Levels
@@ -59,6 +65,7 @@ export const questions = [
     answer2: "No",
     points2: "0",
     category: "Persona Spectrum Levels",
+    id: "psp-1",
   },
   {
     text: "Have you conducted interviews, surveys, or collected qualitative data directly from potential customers to validate their needs, pain points, and decision-making processes?",
@@ -67,6 +74,7 @@ export const questions = [
     answer2: "No",
     points2: "0",
     category: "Persona Spectrum Levels",
+    id: "psp-2",
   },
   {
     text: "Have you tested or validated your customer personas in a real-world context, such as through pilot programs, focus groups, or market tests?",
@@ -75,5 +83,6 @@ export const questions = [
     answer2: "No",
     points2: "0",
     category: "Persona Spectrum Levels",
+    id: "psp-3",
   },
 ]
