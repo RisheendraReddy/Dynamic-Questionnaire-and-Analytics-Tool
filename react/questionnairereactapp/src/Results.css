@@ -1,64 +1,182 @@
-/* New styles for results page (with transitions) */
+/* Results page styling */
 .results-container {
-    padding: 20px;
-    margin: 20px auto;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 1200px;
-    word-wrap: break-word;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out; /* Fade-in effect */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-.results-container.fade-appear-active {
-    opacity: 1;
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-/* Hover effect for buttons */
-.results-container button {
-    margin: 10px 0;
+.logo {
+  max-width: 250px;
+  margin-bottom: 20px;
+}
+
+h1, h2 {
+  color: #8C1D40; /* ASU maroon */
+  text-align: center;
+}
+
+.radar-chart-container {
+  position: relative;
+  background-color: #f9f9f9;
+  margin: 30px auto;
+  border-radius: 10px;
+  padding: 20px;
+  width: 90%;
+  max-width: 800px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.radar-chart {
+  height: 400px;
+  position: relative;
+}
+
+.radar-chart::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0) 60%, rgba(255,255,255,1) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Download section styling */
+.download-section {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0 15px 0;
+}
+
+.download-btn {
+  padding: 12px 25px;
+  font-size: 1.1em;
+  background-color: #FFC627; /* ASU gold */
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+
+.download-btn:hover {
+  background-color: #8C1D40; /* ASU maroon */
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.description {
+  text-align: center;
+  margin-bottom: 30px;
+  color: #444;
+}
+
+.results-container h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.results-container h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  right: 25%;
+  height: 3px;
+  background: linear-gradient(to right, transparent, #8C1D40, transparent);
+}
+
+.category-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.category-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  width: calc(33% - 20px);
+  min-width: 250px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-card.active {
+  background-color: #fff9e6;
+  border-left: 4px solid #FFC627; /* ASU gold */
+}
+
+.category-card h4 {
+  color: #333;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.category-card h4::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: #8C1D40; /* ASU maroon */
+  transition: width 0.3s ease;
+}
+
+.category-card.active h4::after {
+  width: 80px;
+}
+
+.category-card p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.category-description {
+  overflow: hidden;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #ddd;
+}
+
+@media (max-width: 768px) {
+  .category-card {
+    width: 100%;
+  }
+  
+  .radar-chart {
+    height: 300px;
+  }
+  
+  .download-btn {
     padding: 10px 20px;
     font-size: 1em;
-    background-color: #ffc324;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Transition for background color and scale */
-}
-
-.results-container button:hover {
-    background-color: #a40145;
-    transform: scale(1.05); /* Slightly enlarges the button on hover */
-}
-
-/* Radar chart fade-in */
-.results-container .radar-chart {
-    background-color: #f9f9f9;
-    margin: 20px auto;
-    border-radius: 8px;
-    width: 80%;
-    height: auto;
-    max-width: 800px;
-    opacity: 0;
-    transition: opacity 1s ease-in-out; /* Fade-in effect for radar chart */
-}
-
-.results-container .radar-chart.loaded {
-    opacity: 1;
-}
-
-/* Add some margin between paragraphs and headings */
-.results-container p + h4 {
-    margin-top: 20px;
-}
-
-/* Fade animation for transitions */
-.results-container.fade-appear {
-    opacity: 0;
-}
-
-.results-container.fade-appear-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
+  }
 }
